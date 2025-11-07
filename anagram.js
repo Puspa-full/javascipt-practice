@@ -41,3 +41,32 @@ function anagram3(str1, str2){
 }
 
 console.log(anagram3('aabb', 'abab'));
+
+// efficient way
+function anagram4(str1, str2) {
+  if (str1.length !== str2.length) return false;
+
+  const charCount = {}
+  
+  for(let char of str1) {
+    charCount[char] = (charCount[char] || 0) +1;
+  }
+
+  for (let char of str2) {
+    if(!charCount[char]){
+      return false;
+    }
+    charCount[char]--;
+  }
+
+  for (let count of Object.values(charCount)){
+    if (count !=0){
+      return false;
+    }
+  }
+
+  return true;
+}
+
+console.log(anagram4('listen', 'silent')); // true
+console.log(anagram4('listen', 'pissed')); // false
